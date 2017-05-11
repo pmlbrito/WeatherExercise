@@ -27,7 +27,20 @@ class HomePresenter: HomePresenterProtocol {
 //MARK: - HomePresenterProtocol Implementation
 extension HomePresenter {
     func loadStoredLocations() {
+        if self.view == nil {
+            return
+        }
         
+        (self.view! as UIViewController).showLoadingOverlay()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            let locations = SharedPreferencesStorageManager.shared.getStoredLocations()
+            
+            DispatchQueue.main.async {
+                (self.view! as UIViewController).hideLoadingOverlay()
+                self.view?.renderLocations(locations: locations)
+            }
+        }
     }
 }
 
