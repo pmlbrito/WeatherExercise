@@ -8,18 +8,21 @@
 
 import UIKit
 
-protocol HomeTableViewControllerProtocol: BaseViewControllerProtocol {
-    func renderLocations(locations: Array<LocationModel>)
-    
-    func addNewLocation()
+protocol AddLocationDelegate: class {
+    func addedLocation()
 }
 
-class HomeTableViewController: UITableViewController, HomeTableViewControllerProtocol {
+protocol HomeTableViewControllerProtocol: BaseViewControllerProtocol {
+    func renderLocations(locations: Array<LocationModel>)
+}
+
+class HomeTableViewController: UITableViewController, HomeTableViewControllerProtocol, AddLocationDelegate {
     
     
     var storedLocations: Array<LocationModel>?
     var presenter: HomePresenter?
    
+    var reloadDataOnResume = false
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,6 +33,15 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
         self.setupView()
         
         self.presenter?.loadStoredLocations()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if(reloadDataOnResume){
+            self.presenter?.loadStoredLocations()
+            reloadDataOnResume = false
+        }
     }
 
     //MARK: - BaseViewControllerProtocol Implementation
@@ -53,9 +65,18 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == ""){
-            //navigate to map pin add screen
+        if segue.identifier == "addLocationMapSegue" {
+            //add delegate
+            (segue.destination as! AddLocationMapViewController).addLocationDelegate = self
         }
+        
+        if segue.identifier == "showLocationWeather" {
+        //TODO: set view controller data
+        }
+        
+        let backItem = UIBarButtonItem()
+        backItem.title = "Back"
+        navigationItem.backBarButtonItem = backItem
     }
 }
 
@@ -65,13 +86,16 @@ extension HomeTableViewController {
         self.storedLocations = locations
         self.tableView.reloadData()
     }
-    
-    func addNewLocation() {
-        self.performSegue(withIdentifier: "", sender: self)
-    }
 }
 
 //MARK: TableView datasource and delegate implementation
 extension HomeTableViewController {
     
+}
+
+//MARK: AddLocationDelegate implementation
+extension HomeTableViewController {
+    func addedLocation() {
+        self.reloadDataOnResume = true
+    }
 }

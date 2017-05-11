@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F050A021EC50FE900297D4F /* AddLocationMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F050A011EC50FE900297D4F /* AddLocationMapViewController.swift */; };
+		3F050A041EC521A700297D4F /* AddLocationMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F050A031EC521A700297D4F /* AddLocationMapPresenter.swift */; };
 		3F4EF9A11EC4EBB9000B507A /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF9A01EC4EBB9000B507A /* LoadingOverlay.swift */; };
 		3F4EF9A31EC4EC40000B507A /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF9A21EC4EC40000B507A /* ViewControllerExtensions.swift */; };
 		424BC3E31EC48CCE00DFCD88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC3E21EC48CCE00DFCD88 /* AppDelegate.swift */; };
@@ -35,6 +37,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3F050A011EC50FE900297D4F /* AddLocationMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationMapViewController.swift; sourceTree = "<group>"; };
+		3F050A031EC521A700297D4F /* AddLocationMapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationMapPresenter.swift; sourceTree = "<group>"; };
 		3F4EF9A01EC4EBB9000B507A /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		3F4EF9A21EC4EC40000B507A /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
 		424BC3DF1EC48CCE00DFCD88 /* WeatherExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +178,8 @@
 		424BC40D1EC4AAA500DFCD88 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				3F050A011EC50FE900297D4F /* AddLocationMapViewController.swift */,
+				3F050A031EC521A700297D4F /* AddLocationMapPresenter.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -298,10 +304,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F050A041EC521A700297D4F /* AddLocationMapPresenter.swift in Sources */,
 				424BC4111EC4AEB500DFCD88 /* HomePresenter.swift in Sources */,
 				424BC40F1EC4ACF100DFCD88 /* HomeTableViewController.swift in Sources */,
 				3F4EF9A31EC4EC40000B507A /* ViewControllerExtensions.swift in Sources */,
 				424BC4141EC4AF1500DFCD88 /* BaseModels.swift in Sources */,
+				3F050A021EC50FE900297D4F /* AddLocationMapViewController.swift in Sources */,
 				3F4EF9A11EC4EBB9000B507A /* LoadingOverlay.swift in Sources */,
 				424BC4081EC48DB900DFCD88 /* LocationModel.swift in Sources */,
 				424BC40A1EC48E3200DFCD88 /* TodayWeatherModel.swift in Sources */,

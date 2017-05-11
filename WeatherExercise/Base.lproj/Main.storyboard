@@ -25,7 +25,7 @@
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <state key="normal" title="Add Location"/>
                                     <connections>
-                                        <segue destination="eHt-6U-PMQ" kind="showDetail" id="2Zh-85-qRA"/>
+                                        <segue destination="eHt-6U-PMQ" kind="show" identifier="addLocationMapSegue" id="6hm-el-X5L"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -52,34 +52,38 @@
             </objects>
             <point key="canvasLocation" x="932" y="183.95802098950526"/>
         </scene>
-        <!--View Controller-->
+        <!--Add Location-->
         <scene sceneID="SzD-Me-pm5">
             <objects>
-                <viewController id="eHt-6U-PMQ" sceneMemberID="viewController">
+                <viewController title="Add Location" id="eHt-6U-PMQ" customClass="AddLocationMapViewController" customModule="WeatherExercise" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JqG-V8-o2S"/>
                         <viewControllerLayoutGuide type="bottom" id="Vaw-wG-jxv"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0fm-Pz-cuP">
+                    <view key="view" clipsSubviews="YES" contentMode="center" id="0fm-Pz-cuP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="txt-d2-z7p">
-                                <rect key="frame" x="16" y="20" width="343" height="627"/>
+                                <rect key="frame" x="16" y="84" width="343" height="563"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Location" id="MAH-6k-ixr"/>
+                    <connections>
+                        <outlet property="mapView" destination="txt-d2-z7p" id="32T-8J-9Bq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Puz-E6-yHD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1768.8" y="183.95802098950526"/>
+            <point key="canvasLocation" x="1786" y="203"/>
         </scene>
-        <!--Weather Locations-->
+        <!--Navigation Controller-->
         <scene sceneID="DMV-ec-2iZ">
             <objects>
-                <navigationController title="Weather Locations" id="B0Z-gG-LuU" sceneMemberID="viewController">
+                <navigationController id="B0Z-gG-LuU" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Jdj-Se-nUl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
