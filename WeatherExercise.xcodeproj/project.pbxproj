@@ -16,6 +16,10 @@
 		424BC4051EC48D6000DFCD88 /* APIDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC4041EC48D6000DFCD88 /* APIDataManager.swift */; };
 		424BC4081EC48DB900DFCD88 /* LocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC4071EC48DB900DFCD88 /* LocationModel.swift */; };
 		424BC40A1EC48E3200DFCD88 /* TodayWeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC4091EC48E3200DFCD88 /* TodayWeatherModel.swift */; };
+		424BC40F1EC4ACF100DFCD88 /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC40E1EC4ACF100DFCD88 /* HomeTableViewController.swift */; };
+		424BC4111EC4AEB500DFCD88 /* HomePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC4101EC4AEB500DFCD88 /* HomePresenter.swift */; };
+		424BC4141EC4AF1500DFCD88 /* BaseModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC4131EC4AF1500DFCD88 /* BaseModels.swift */; };
+		424BC4171EC4B4BD00DFCD88 /* SharedPreferencesStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC4161EC4B4BD00DFCD88 /* SharedPreferencesStorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +46,10 @@
 		424BC4041EC48D6000DFCD88 /* APIDataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIDataManager.swift; sourceTree = "<group>"; };
 		424BC4071EC48DB900DFCD88 /* LocationModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationModel.swift; sourceTree = "<group>"; };
 		424BC4091EC48E3200DFCD88 /* TodayWeatherModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodayWeatherModel.swift; sourceTree = "<group>"; };
+		424BC40E1EC4ACF100DFCD88 /* HomeTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		424BC4101EC4AEB500DFCD88 /* HomePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePresenter.swift; sourceTree = "<group>"; };
+		424BC4131EC4AF1500DFCD88 /* BaseModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModels.swift; sourceTree = "<group>"; };
+		424BC4161EC4B4BD00DFCD88 /* SharedPreferencesStorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedPreferencesStorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +91,7 @@
 		424BC3E11EC48CCE00DFCD88 /* WeatherExercise */ = {
 			isa = PBXGroup;
 			children = (
+				424BC40B1EC4A74100DFCD88 /* Presentation */,
 				424BC4021EC48D0E00DFCD88 /* Data */,
 				424BC3E21EC48CCE00DFCD88 /* AppDelegate.swift */,
 				424BC3E41EC48CCE00DFCD88 /* ViewController.swift */,
@@ -106,6 +115,7 @@
 		424BC4021EC48D0E00DFCD88 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				424BC4151EC4B48A00DFCD88 /* Storage */,
 				424BC4061EC48D8E00DFCD88 /* Models */,
 				424BC4031EC48D4600DFCD88 /* API */,
 			);
@@ -127,6 +137,48 @@
 				424BC4091EC48E3200DFCD88 /* TodayWeatherModel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		424BC40B1EC4A74100DFCD88 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				424BC4121EC4AEF900DFCD88 /* Common */,
+				424BC40D1EC4AAA500DFCD88 /* Map */,
+				424BC40C1EC4AA9200DFCD88 /* Home */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		424BC40C1EC4AA9200DFCD88 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				424BC40E1EC4ACF100DFCD88 /* HomeTableViewController.swift */,
+				424BC4101EC4AEB500DFCD88 /* HomePresenter.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		424BC40D1EC4AAA500DFCD88 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		424BC4121EC4AEF900DFCD88 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				424BC4131EC4AF1500DFCD88 /* BaseModels.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		424BC4151EC4B48A00DFCD88 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				424BC4161EC4B4BD00DFCD88 /* SharedPreferencesStorageManager.swift */,
+			);
+			path = Storage;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -232,9 +284,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				424BC4111EC4AEB500DFCD88 /* HomePresenter.swift in Sources */,
+				424BC40F1EC4ACF100DFCD88 /* HomeTableViewController.swift in Sources */,
+				424BC4141EC4AF1500DFCD88 /* BaseModels.swift in Sources */,
 				424BC4081EC48DB900DFCD88 /* LocationModel.swift in Sources */,
 				424BC40A1EC48E3200DFCD88 /* TodayWeatherModel.swift in Sources */,
 				424BC3E51EC48CCE00DFCD88 /* ViewController.swift in Sources */,
+				424BC4171EC4B4BD00DFCD88 /* SharedPreferencesStorageManager.swift in Sources */,
 				424BC4051EC48D6000DFCD88 /* APIDataManager.swift in Sources */,
 				424BC3E31EC48CCE00DFCD88 /* AppDelegate.swift in Sources */,
 			);
@@ -450,6 +506,7 @@
 				424BC3FE1EC48CCF00DFCD88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		424BC3FF1EC48CCF00DFCD88 /* Build configuration list for PBXNativeTarget "WeatherExerciseTests" */ = {
 			isa = XCConfigurationList;
@@ -458,6 +515,7 @@
 				424BC4011EC48CCF00DFCD88 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
