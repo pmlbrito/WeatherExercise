@@ -11,7 +11,7 @@ import Foundation
 class APIDataManager {
     
     fileprivate static let apiKey = "c6e381d8c7ff98f0fee43775817cf6ad"
-    fileprivate static let baseURL = "https://api.openweathermap.org/data/2.5/"
+    fileprivate static let baseURL = "http://api.openweathermap.org/data/2.5/"
 
     
     public static func getTodaysWeather(location: LocationModel?, completionHandler:@escaping (TodayWeatherModel?, Error?)->Void){
@@ -41,7 +41,10 @@ class APIDataManager {
                 
                 if(data != nil) {
                     if let parsedResponse = APIDataManager.convertToDictionary(data: data!) {
-                        completionHandler(TodayWeatherModel(model:parsedResponse), nil)
+                        let parsedModel = TodayWeatherModel(model:parsedResponse)
+                        parsedModel.location = location
+                        
+                        completionHandler(parsedModel, nil)
                         return
                     }
                 }

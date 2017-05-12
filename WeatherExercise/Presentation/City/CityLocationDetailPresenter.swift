@@ -23,17 +23,19 @@ class CityLocationDetailPresenter: CityLocationDetailPresenterProtocol {
         
         (self.view! as UIViewController).showLoadingOverlay()
         
-
         APIDataManager.getTodaysWeather(location: location, completionHandler: { (weather, error) in
-            (self.view! as UIViewController).hideLoadingOverlay()
             
-            if error != nil {
-                (self.view! as UIViewController).showError(error: error!)
-                return
-            }
-            
-            if weather != nil {
-                self.view?.renderLocationWeather(weather: weather!)
+            DispatchQueue.main.async {
+                (self.view! as UIViewController).hideLoadingOverlay()
+                
+                if error != nil {
+                    (self.view! as UIViewController).showError(error: error!)
+                    return
+                }
+                
+                if weather != nil {
+                    self.view?.renderLocationWeather(weather: weather!)
+                }
             }
         })
     }
