@@ -20,10 +20,11 @@ class AddLocationMapViewController: UIViewController, AddLocationMapProtocol  {
 
     @IBOutlet weak var mapView: MKMapView!
     
-    var selectedLocation: CLPlacemark?
+    var selectedLocation: LocationModel?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.setupView()
     }
     
     func setupView() {
@@ -33,7 +34,6 @@ class AddLocationMapViewController: UIViewController, AddLocationMapProtocol  {
     
     
     override func viewDidLoad() {
-        //TODO: refine map actions
         self.setupMapActions()
         self.setupNavigationBarActions()
     }
@@ -53,36 +53,8 @@ class AddLocationMapViewController: UIViewController, AddLocationMapProtocol  {
         if gestureRecognizer.state == UIGestureRecognizerState.ended {
             let touchPoint = gestureRecognizer.location(in: self.mapView)
             let newCoordinates = self.mapView.convert(touchPoint, toCoordinateFrom: self.mapView)
-            let annotation = MKPointAnnotation()
-            annotation.coordinate = newCoordinates
             
-            CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: newCoordinates.latitude, longitude: newCoordinates.longitude), completionHandler: {(placemarks, error) -> Void in
-                if error != nil {
-                    print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
-                    return
-                }
-                
-                if placemarks != nil && placemarks!.count > 0 {
-                    let pm = placemarks![0] as CLPlacemark
-                    
-                    // not all places have thoroughfare & subThoroughfare so validate those values
-                    annotation.title = pm.locality
-                    annotation.subtitle = pm.subLocality
-                    self.mapView.removeAnnotations(self.mapView.annotations)
-                    self.mapView.addAnnotation(annotation)
-                    
-                    
-                    print(pm)
-                }
-                else {
-                    annotation.title = "Unknown Place"
-                    self.mapView.addAnnotation(annotation)
-                    print("Problem with the data received from geocoder")
-                }
-                //places.append(["name":annotation.title,"latitude":"\(newCoordinates.latitude)","longitude":"\(newCoordinates.longitude)"])
-            })
-            
-            self.mapView.selectAnnotation(annotation, animated: true)
+            self.createAnnotation(coordinates: newCoordinates)
         }
     }
     
@@ -91,6 +63,43 @@ class AddLocationMapViewController: UIViewController, AddLocationMapProtocol  {
             //save current pin location
             self.presenter?.saveLocation(location: self.selectedLocation!)
         }
+    }
+    
+    //MARK: Private Helpers
+    fileprivate func createAnnotation(coordinates: CLLocationCoordinate2D) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = coordinates
+        
+        CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coordinates.latitude, longitude: coordinates.longitude), completionHandler: {(placemarks, error) -> Void in
+            if error != nil {
+                print("Reverse geocoder failed with error" + (error?.localizedDescription)!)
+                self.selectLocation(annotation: annotation)
+                return
+            }
+            
+            if placemarks != nil && placemarks!.count > 0 {
+                let pm = placemarks!.first!
+                
+                // not all places have thoroughfare & subThoroughfare so validate those values
+                annotation.title = pm.locality
+                annotation.subtitle = pm.subLocality
+                print(pm)
+            }
+            else {
+                annotation.title = "Unknown Place"
+                self.mapView.addAnnotation(annotation)
+                print("Problem with the data received from geocoder")
+            }
+            self.mapView.removeAnnotations(self.mapView.annotations)
+            self.mapView.addAnnotation(annotation)
+            self.mapView.selectAnnotation(annotation, animated: false)
+            
+            self.selectLocation(annotation: annotation)
+        })
+    }
+    
+    fileprivate func selectLocation(annotation: MKPointAnnotation){
+        self.selectedLocation = LocationModel(lat: annotation.coordinate.latitude, lon: annotation.coordinate.longitude, location: String(format:"%@ - %@", annotation.title ?? "", annotation.subtitle ?? ""))
     }
 }
 

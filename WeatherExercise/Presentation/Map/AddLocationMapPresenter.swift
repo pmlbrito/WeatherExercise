@@ -11,15 +11,29 @@ import MapKit
 import UIKit
 
 protocol AddLocationPresenterProtocol: BasePresenterProtocol {
-    func saveLocation(location: CLPlacemark)
+    func saveLocation(location: LocationModel)
 }
 
 class AddLocationMapPresenter: AddLocationPresenterProtocol {
     
     var view: AddLocationMapViewController?
     
-    func saveLocation(location: CLPlacemark) {
-        //TODO: save and go back
+    func saveLocation(location: LocationModel) {
+        //save and go back
+        if self.view == nil {
+            return
+        }
+        
+        (self.view! as UIViewController).showLoadingOverlay()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            SharedPreferencesStorageManager.shared.addLocation(location: location)
+            
+            DispatchQueue.main.async {
+                (self.view! as UIViewController).hideLoadingOverlay()
+                self.view?.locationSaved()
+            }
+        }
     }
 }
 

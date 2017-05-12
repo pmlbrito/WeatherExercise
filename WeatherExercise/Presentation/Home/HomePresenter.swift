@@ -11,6 +11,7 @@ import Foundation
 
 public protocol HomePresenterProtocol: BasePresenterProtocol {
     func loadStoredLocations()
+    func deleteLocation(location: LocationModel)
 }
 
 class HomePresenter: HomePresenterProtocol {
@@ -34,6 +35,25 @@ extension HomePresenter {
         (self.view! as UIViewController).showLoadingOverlay()
         
         DispatchQueue.global(qos: .userInitiated).async {
+            let locations = SharedPreferencesStorageManager.shared.getStoredLocations()
+            
+            DispatchQueue.main.async {
+                (self.view! as UIViewController).hideLoadingOverlay()
+                self.view?.renderLocations(locations: locations)
+            }
+        }
+    }
+    
+    func deleteLocation(location: LocationModel) {
+        if self.view == nil {
+            return
+        }
+        
+        (self.view! as UIViewController).showLoadingOverlay()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            SharedPreferencesStorageManager.shared.deleteLocation(location: location)
+            
             let locations = SharedPreferencesStorageManager.shared.getStoredLocations()
             
             DispatchQueue.main.async {

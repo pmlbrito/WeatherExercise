@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LocationModel: NSObject, NSCoding {
+open class LocationModel: NSObject, NSCoding {
     
     var locationName: String?
     var latitude: Double
@@ -32,14 +32,14 @@ class LocationModel: NSObject, NSCoding {
     
     
     //MARK: NSCoding and Serialization
-    required convenience init(coder aDecoder: NSCoder) {
+    required convenience public init(coder aDecoder: NSCoder) {
         let latitude = aDecoder.decodeDouble(forKey: "latitude")
         let longitude = aDecoder.decodeDouble(forKey: "longitude")
         let location = aDecoder.decodeObject(forKey: "locationName") as? String
         self.init(lat: latitude, lon: longitude, location: location)
     }
     
-    func encode(with aCoder: NSCoder) {
+    public func encode(with aCoder: NSCoder) {
         aCoder.encode(latitude, forKey: "latitude")
         aCoder.encode(longitude, forKey: "longitude")
         aCoder.encode(locationName, forKey: "locationName")
@@ -52,7 +52,11 @@ class LocationModel: NSObject, NSCoding {
     }
     
     func getQueryCoordinates() -> String {
-        return String(format:"lat=%d&lon=%d", self.latitude, self.longitude)
+        return String(format:"lat=%.9f&lon=%.9f", self.latitude, self.longitude)
+    }
+    
+    func getCoordinatesText() -> String {
+        return String(format:"geo: latitude=%.9f, lon=%.9f", self.latitude, self.longitude)
     }
     
 }

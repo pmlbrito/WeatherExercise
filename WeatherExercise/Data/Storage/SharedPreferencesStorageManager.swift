@@ -68,8 +68,10 @@ class SharedPreferencesStorageManager {
     }
     
     fileprivate func getLocationsArrayFromStorage() -> Array<LocationModel> {
-        let decoded  = userDefaults.object(forKey: SharedPreferencesStorageManager.locationsStorageKey) as! Data
-        let decodedArray = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? Array<LocationModel>
+        var decodedArray: Array<LocationModel>? = nil
+        if let decoded  = userDefaults.object(forKey: SharedPreferencesStorageManager.locationsStorageKey) as? Data {
+            decodedArray = NSKeyedUnarchiver.unarchiveObject(with: decoded) as? Array<LocationModel>
+        }
         
         return decodedArray ?? Array<LocationModel>()
     }

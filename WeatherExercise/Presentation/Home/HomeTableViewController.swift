@@ -17,7 +17,7 @@ protocol HomeTableViewControllerProtocol: BaseViewControllerProtocol {
 }
 
 class HomeTableViewController: UITableViewController, HomeTableViewControllerProtocol, AddLocationDelegate {
-    
+    static let locationCellReuseIdentifier = "HomeLocationCellIdentifier"
     
     var storedLocations: Array<LocationModel>?
     var presenter: HomePresenter?
@@ -49,7 +49,7 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
         self.presenter = HomePresenter()
         self.presenter?.bindView(view: self)
         
-        var rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(HomeTableViewController.editButtonPressed))
+        let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(HomeTableViewController.editButtonPressed))
         self.navigationItem.rightBarButtonItem = rightButton
     }
     
@@ -90,7 +90,30 @@ extension HomeTableViewController {
 
 //MARK: TableView datasource and delegate implementation
 extension HomeTableViewController {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.storedLocations != nil ? self.storedLocations!.count : 0
+    }
     
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.tableView.dequeueReusableCell(withIdentifier: HomeTableViewController.locationCellReuseIdentifier) as? HomeLocationTableViewCell
+        
+        if(cell != nil) {
+            if let cellModel = self.storedLocations?[indexPath.row] {
+                cell?.setupCell(location: cellModel)
+            }
+            return cell!
+        }
+        
+        return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if(editingStyle == UITableViewCellEditingStyle.delete) {
+            if let itemToDelete = self.storedLocations?[indexPath.row] {
+                self.presenter?.deleteLocation(location: itemToDelete)
+            }
+        }
+    }
 }
 
 //MARK: AddLocationDelegate implementation

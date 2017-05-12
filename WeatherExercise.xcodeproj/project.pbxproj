@@ -11,6 +11,7 @@
 		3F050A041EC521A700297D4F /* AddLocationMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F050A031EC521A700297D4F /* AddLocationMapPresenter.swift */; };
 		3F4EF9A11EC4EBB9000B507A /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF9A01EC4EBB9000B507A /* LoadingOverlay.swift */; };
 		3F4EF9A31EC4EC40000B507A /* ViewControllerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F4EF9A21EC4EC40000B507A /* ViewControllerExtensions.swift */; };
+		423D58B21EC59C3200097691 /* HomeLocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 423D58B11EC59C3200097691 /* HomeLocationTableViewCell.swift */; };
 		424BC3E31EC48CCE00DFCD88 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC3E21EC48CCE00DFCD88 /* AppDelegate.swift */; };
 		424BC3E51EC48CCE00DFCD88 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 424BC3E41EC48CCE00DFCD88 /* ViewController.swift */; };
 		424BC3E81EC48CCE00DFCD88 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 424BC3E61EC48CCE00DFCD88 /* Main.storyboard */; };
@@ -41,6 +42,7 @@
 		3F050A031EC521A700297D4F /* AddLocationMapPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationMapPresenter.swift; sourceTree = "<group>"; };
 		3F4EF9A01EC4EBB9000B507A /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		3F4EF9A21EC4EC40000B507A /* ViewControllerExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensions.swift; sourceTree = "<group>"; };
+		423D58B11EC59C3200097691 /* HomeLocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeLocationTableViewCell.swift; sourceTree = "<group>"; };
 		424BC3DF1EC48CCE00DFCD88 /* WeatherExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeatherExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		424BC3E21EC48CCE00DFCD88 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		424BC3E41EC48CCE00DFCD88 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +171,7 @@
 		424BC40C1EC4AA9200DFCD88 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				424BC4181EC5923300DFCD88 /* Views */,
 				424BC40E1EC4ACF100DFCD88 /* HomeTableViewController.swift */,
 				424BC4101EC4AEB500DFCD88 /* HomePresenter.swift */,
 			);
@@ -199,6 +202,14 @@
 				424BC4161EC4B4BD00DFCD88 /* SharedPreferencesStorageManager.swift */,
 			);
 			path = Storage;
+			sourceTree = "<group>";
+		};
+		424BC4181EC5923300DFCD88 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				423D58B11EC59C3200097691 /* HomeLocationTableViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F050A041EC521A700297D4F /* AddLocationMapPresenter.swift in Sources */,
+				423D58B21EC59C3200097691 /* HomeLocationTableViewCell.swift in Sources */,
 				424BC4111EC4AEB500DFCD88 /* HomePresenter.swift in Sources */,
 				424BC40F1EC4ACF100DFCD88 /* HomeTableViewController.swift in Sources */,
 				3F4EF9A31EC4EC40000B507A /* ViewControllerExtensions.swift in Sources */,
