@@ -23,6 +23,7 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
     var presenter: HomePresenter?
    
     var reloadDataOnResume = false
+    var selectedLocation: LocationModel?
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -30,6 +31,8 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
     
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.setupView()
         
         self.presenter?.loadStoredLocations()
@@ -51,6 +54,8 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
         
         let rightButton = UIBarButtonItem(title: "Edit", style: UIBarButtonItemStyle.plain, target: self, action: #selector(HomeTableViewController.editButtonPressed))
         self.navigationItem.rightBarButtonItem = rightButton
+        
+        self.createInfoButton()
     }
     
     
@@ -64,19 +69,38 @@ class HomeTableViewController: UITableViewController, HomeTableViewControllerPro
         }
     }
     
+    func infoButtonPressed() {
+        self.performSegue(withIdentifier: "showAppHelpSegue", sender: self)
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "addLocationMapSegue" {
             //add delegate
             (segue.destination as! AddLocationMapViewController).addLocationDelegate = self
         }
         
-        if segue.identifier == "showLocationWeather" {
-        //TODO: set view controller data
+        if segue.identifier == "showLocationWeatherSegue" {
+        //set view controller data
+            if selectedLocation != nil {
+                (segue.destination as! CityLocationDetailViewController).setupLocation(location: self.selectedLocation!)
+            }
+        }
+        
+        if segue.identifier == "showAppHelpSegue" {
+            //set view controller data if needed
         }
         
         let backItem = UIBarButtonItem()
         backItem.title = "Back"
         navigationItem.backBarButtonItem = backItem
+    }
+    
+    fileprivate func createInfoButton() {
+        // Create the info button
+        let infoButton = UIButton(type: .infoLight)
+        infoButton.addTarget(self, action: #selector(HomeTableViewController.infoButtonPressed), for: .touchUpInside)
+        let infoBarButtonItem = UIBarButtonItem(customView: infoButton)
+        navigationItem.leftBarButtonItem = infoBarButtonItem
     }
 }
 
@@ -105,6 +129,14 @@ extension HomeTableViewController {
         }
         
         return UITableViewCell()
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let itemSelected = self.storedLocations?[indexPath.row] {
+            self.selectedLocation = itemSelected
+            self.performSegue(withIdentifier: "showLocationWeatherSegue", sender: self)
+        }
+
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

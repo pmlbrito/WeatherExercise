@@ -22,6 +22,9 @@ class TodayWeatherModel {
     var wind_speed: Double?
     var wind_direction: Double?
     
+    var humidity: Int?
+    var rain: Int?
+    
     init(model: Dictionary<String,Any?>){
         //build model from dictionary
         
@@ -40,11 +43,17 @@ class TodayWeatherModel {
             temp_min = main["temp_min"] as? Double
             temp = main["temp"] as? Double
             temp_max = main["temp_max"] as? Double
+            
+            humidity = main["humidity"] as? Int
         }
         
         if let windDict = model["wind"] as? Dictionary<String,Any?> {
             wind_speed = windDict["speed"] as? Double
             wind_direction = windDict["deg"] as? Double
+        }
+        
+        if let cloudsDict = model["clouds"] as? Dictionary<String,Any?> {
+            rain = cloudsDict["all"] as? Int
         }
     }
 }
